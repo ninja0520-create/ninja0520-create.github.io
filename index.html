@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>포트폴리오 | 김기중</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --panel: rgba(10, 19, 32, 0.86);
+        --panel-strong: #0f1b2d;
+        --text: #f3f6fb;
+        --muted: #93a4b9;
+        --accent: #4cc9f0;
+        --accent-2: #7c8cff;
+        --line: rgba(255,255,255,0.12);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', 'Pretendard', 'Noto Sans KR', sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at top left, rgba(76, 201, 240, 0.22), transparent 28%),
+          radial-gradient(circle at bottom right, rgba(124, 140, 255, 0.18), transparent 24%),
+          linear-gradient(135deg, #050b16 0%, #0b1424 45%, #111d31 100%);
+        line-height: 1.75;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      .container {
+        width: min(1160px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+
+      header {
+        padding: 2.2rem 0 1rem;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .brand {
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--text);
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 1.4rem;
+        align-items: stretch;
+        padding: 1.6rem;
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(9, 16, 30, 0.94), rgba(16, 28, 44, 0.9));
+        border: 1px solid var(--line);
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.33);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90deg, rgba(76, 201, 240, 0.1), transparent 35%, rgba(124, 140, 255, 0.08));
+        pointer-events: none;
+      }
+
+      .hero > * { position: relative; z-index: 1; }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        padding: 0.42rem 0.8rem;
+        border-radius: 999px;
+        background: rgba(76, 201, 240, 0.12);
+        color: var(--accent);
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        font-weight: 600;
+      }
+
+      h1, h2, h3 { margin: 0 0 0.7rem; letter-spacing: -0.02em; }
+      h1 { font-size: clamp(2rem, 3.4vw, 3rem); line-height: 1.2; }
+      h2 { font-size: 1.35rem; }
+      h3 { font-size: 1.1rem; }
+      .lead {
+        font-size: 1.03rem;
+        color: var(--muted);
+        max-width: 720px;
+        margin: 0;
+      }
+
+      .actions { margin-top: 1.4rem; display: flex; gap: 0.8rem; flex-wrap: wrap; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.82rem 1rem;
+        border-radius: 999px;
+        font-weight: 700;
+        transition: transform 180ms ease, background 180ms ease;
+      }
+      .btn:hover { transform: translateY(-2px); }
+      .btn.primary {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        color: white;
+      }
+      .btn.secondary {
+        border: 1px solid var(--line);
+        background: rgba(255,255,255,0.03);
+      }
+
+      .profile-card {
+        border-radius: 22px;
+        padding: 1.15rem;
+        background: linear-gradient(145deg, rgba(76, 201, 240, 0.14), rgba(124, 140, 255, 0.16));
+        border: 1px solid rgba(255,255,255,0.1);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+
+      .avatar {
+        width: 100%;
+        aspect-ratio: 1 / 1;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #1d4ed8, #7c3aed);
+        display: grid;
+        place-items: center;
+        font-size: 3.2rem;
+        font-weight: 700;
+        color: white;
+      }
+
+      .info-list {
+        display: grid;
+        gap: 0.55rem;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .section {
+        padding: 1.2rem 0 0.2rem;
+      }
+      .section-title-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 0.9rem;
+      }
+      .section-title { margin: 0; }
+      .section-subtitle { color: var(--muted); font-size: 0.95rem; }
+      .grid { display: grid; gap: 1rem; }
+      .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 1.2rem;
+        box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        transition: transform 180ms ease, border-color 180ms ease;
+      }
+      .card:hover { transform: translateY(-3px); border-color: rgba(76, 201, 240, 0.35); }
+      .card p { color: var(--muted); margin: 0; }
+      .tag-list { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; }
+      .tag {
+        padding: 0.42rem 0.7rem;
+        border-radius: 999px;
+        background: rgba(76, 201, 240, 0.12);
+        color: #bfeeff;
+        font-size: 0.9rem;
+      }
+      .project h3 { margin-bottom: 0.3rem; }
+      .year { color: var(--accent); font-size: 0.9rem; font-weight: 700; }
+
+      .contact-card {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      footer {
+        padding: 1.4rem 0 2.3rem;
+        color: var(--muted);
+        text-align: center;
+        font-size: 0.95rem;
+      }
+
+      @media (max-width: 900px) {
+        .hero { grid-template-columns: 1fr; }
+      }
+      @media (max-width: 768px) {
+        .grid-2, .grid-3 { grid-template-columns: 1fr; }
+        .topbar, .section-title-row, .contact-card { flex-direction: column; align-items: flex-start; }
+        header { padding-top: 1.2rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="topbar">
+          <span class="brand">Portfolio</span>
+          <span>Engineering • Quality • Collaboration</span>
+        </div>
+        <div class="hero">
+          <div>
+            <span class="eyebrow">한국지엠 · 바디 엔지니어</span>
+            <h1>차량의 완성도와 품질을 높이는 실무형 엔지니어 김기중입니다.</h1>
+            <p class="lead">
+              자동차 개발 현장에서 부품 구조와 생산 공정, 품질 이슈를 종합적으로 바라보며
+              문제를 분석하고 개선 방향을 제시하는 데 집중해 왔습니다.
+              협업과 책임감 있는 실행력을 바탕으로 더 나은 제품 개발에 기여하고 있습니다.
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#projects">경력 보기</a>
+              <a class="btn secondary" href="#contact">연락처</a>
+            </div>
+          </div>
+          <div class="profile-card">
+            <div class="avatar">김</div>
+            <h3>김기중</h3>
+            <div class="info-list">
+              <span>소속: 한국지엠</span>
+              <span>직무: 바디 엔지니어</span>
+              <span>분야: 차량 개발 / 품질 개선</span>
+            </div>
+            <div class="tag-list">
+              <span class="tag">부품 설계</span>
+              <span class="tag">품질 관리</span>
+              <span class="tag">현장 대응</span>
+              <span class="tag">구조 분석</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="section">
+        <div class="section-title-row">
+          <h2 class="section-title">소개</h2>
+          <span class="section-subtitle">현장 경험을 바탕으로 한 엔지니어링 관점</span>
+        </div>
+        <div class="grid grid-2">
+          <div class="card">
+            <h3>About Me</h3>
+            <p>
+              저는 자동차 산업 현장에서 차량의 외관과 구조적 완성도를 높이는 역할을 담당하며,
+              부품 간 연계와 설계 변경, 문제 원인 분석을 통해 제품 품질을 개선하는 업무를 수행하고 있습니다.
+            </p>
+          </div>
+          <div class="card">
+            <h3>핵심 역량</h3>
+            <p>
+              차량 부품 구조 이해, 공정 및 품질 이슈 파악, 데이터 기반 분석,
+              협업을 통한 문제 해결 능력을 바탕으로 실무에 바로 적용 가능한 결과를 만들어내는 데 강점이 있습니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-title-row">
+          <h2 class="section-title">경력 및 프로젝트 경험</h2>
+          <span class="section-subtitle">문제 해결 중심의 실무 경험</span>
+        </div>
+        <div class="grid grid-3">
+          <article class="card project">
+            <div class="year">현재</div>
+            <h3>한국지엠 바디 엔지니어</h3>
+            <p>차량 바디 부품의 설계 및 개발 과정에서 품질·성능·공정 관점의 문제를 해결하고 있습니다.</p>
+          </article>
+          <article class="card project">
+            <div class="year">최근</div>
+            <h3>품질 이슈 개선</h3>
+            <p>부품 관련 이슈를 분석하고 개선 방향을 도출하여 제품 완성도와 신뢰성을 높이는 활동을 수행했습니다.</p>
+          </article>
+          <article class="card project">
+            <div class="year">협업</div>
+            <h3>다기관 협업 경험</h3>
+            <p>설계·품질·생산 부서와 협업하며 문제를 공유하고 실행 가능한 해결책을 제시하는 경험을 갖고 있습니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-title-row">
+          <h2 class="section-title">핵심 역량</h2>
+          <span class="section-subtitle">실무에 바로 적용 가능한 능력</span>
+        </div>
+        <div class="card">
+          <div class="tag-list">
+            <span class="tag">차량 구조 이해</span>
+            <span class="tag">품질 개선</span>
+            <span class="tag">문제 분석</span>
+            <span class="tag">협업/커뮤니케이션</span>
+            <span class="tag">엔지니어링 문서 작성</span>
+            <span class="tag">데이터 기반 판단</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-title-row">
+          <h2 class="section-title">연락처</h2>
+          <span class="section-subtitle">프로젝트나 협업 문의를 환영합니다</span>
+        </div>
+        <div class="card contact-card">
+          <div>
+            <p><strong>소속</strong> 한국지엠</p>
+            <p><strong>직무</strong> 바디 엔지니어</p>
+            <p><strong>위치</strong> 대한민국</p>
+          </div>
+          <a class="btn secondary" href="mailto:your@email.com">메일 보내기</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container">© 2026 김기중. All rights reserved.</div>
+    </footer>
+  </body>
+</html>
